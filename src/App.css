@@ -31,3 +31,12 @@
     transform: rotate(360deg);
   }
 }
+.mt-5{
+  margin-top: 5px;
+}
+.ml-5{
+  margin-left: 5px;
+}
+.text-right{
+  text-align: right;
+}
