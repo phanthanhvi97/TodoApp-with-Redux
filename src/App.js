@@ -39,6 +39,16 @@ class App extends Component{
                 id:this.generateID(),
                 name:'boi',
                 status: false
+            },
+            {
+                id: this.generateID(),
+                name: 'di ngu',
+                status: true
+            },
+            {
+                id:this.generateID(),
+                name:'di choi',
+                status: false
             }
         ];
         this.setState({
