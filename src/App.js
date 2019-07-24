@@ -18,8 +18,8 @@ class App extends Component{
          },
          keyword:'',
          sort:{
-             by:'name',
-             value:1
+             by:'',
+             value:null
          }
       };
     };
@@ -165,11 +165,21 @@ class App extends Component{
         })
     }
     onSort=(sort)=>{
-        console.log(sort)
+        // console.log(sort)
+        this.setState({
+            sort:{
+                by:sort.by,
+                value:sort.value
+            }
+        },()=>{
+            // console.log(this.state.sort)
+        })
+        
     }
   render(){
       
-       var {tasks, isDisplayForm, taskEditing, filter, keyword}=this.state; //=this.state.tasks
+       var {tasks, isDisplayForm, taskEditing, filter, keyword,sort}=this.state; //=this.state.tasks
+
        if(filter){
            if(filter.name){
                tasks=tasks.filter((task)=>{
@@ -193,7 +203,33 @@ class App extends Component{
                                         onSubmit={this.onSubmit} 
                                         task={taskEditing}
                                         onCloseForm={this.onCloseForm}/>:'';
-
+    //    console.log(sort)
+    //sap xep
+       if(sort.by==='name'){
+        tasks.sort((a,b)=>{
+           if(a.name>b.name){
+                return sort.value
+            }
+           else if(a.name<b.name){
+                return -sort.value
+           }
+           else{
+               return 0
+           }
+        })
+       }else{
+        tasks.sort((a,b)=>{
+            if(a.status>b.status){
+                 return -sort.value
+             }
+            else if(a.status<b.status){
+                 return sort.value
+            }
+            else{
+                return 0
+            }
+         })
+       }       
     return(
       <div className="container">
         <div className="text-center">
