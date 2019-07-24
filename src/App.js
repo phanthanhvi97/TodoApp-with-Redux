@@ -15,6 +15,11 @@ class App extends Component{
          filter:{
              name:'',
              status:-1
+         },
+         keyword:'',
+         sort:{
+             by:'name',
+             value:1
          }
       };
     };
@@ -153,9 +158,18 @@ class App extends Component{
             }
         })
     }
+    onSearch=(keyword)=>{
+        // console.log(keyword)
+        this.setState({
+            keyword:keyword
+        })
+    }
+    onSort=(sort)=>{
+        console.log(sort)
+    }
   render(){
       
-       var {tasks, isDisplayForm, taskEditing, filter}=this.state; //=this.state.tasks
+       var {tasks, isDisplayForm, taskEditing, filter, keyword}=this.state; //=this.state.tasks
        if(filter){
            if(filter.name){
                tasks=tasks.filter((task)=>{
@@ -170,6 +184,11 @@ class App extends Component{
                return task.status===(filter.status===1?true:false)
            }
        })
+       if(keyword){
+           tasks=tasks.filter((task)=>{
+               return task.name.toLowerCase().indexOf(keyword)!==-1;
+           })
+       }
        var elmTaskForm = isDisplayForm?<TaskForm 
                                         onSubmit={this.onSubmit} 
                                         task={taskEditing}
@@ -193,7 +212,7 @@ class App extends Component{
                     <span>Reset</span>
                 </button>
                 <div className="row mt-15">
-                    <Control />
+                    <Control onSearch={this.onSearch} onSort={this.onSort}/>
                 </div>
                 <div className="row mt-15">
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
