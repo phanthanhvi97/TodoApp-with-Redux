@@ -3,6 +3,8 @@ import TaskForm from './components/TaskForm';
 import Control from './components/Control';
 import TaskList from './components/TaskList'
 import './App.css';
+import _ from 'lodash'
+// import {findIndex, filter} from 'lodash'
 class App extends Component{
     constructor(props) {
       super(props)
@@ -98,9 +100,13 @@ class App extends Component{
 
     }
     onUpdateStatus=(id)=>{
+        var tasks=this.state.tasks
         // console.log(id);
-        var index=this.findIndex(id);
-        var {tasks}=this.state;
+        // var index=this.findIndex(id);
+        var index=_.findIndex(tasks,(task)=>{
+            return task.id===id
+        })
+        // var {tasks}=this.state;
         if(index!==-1)
         {
             tasks[index].status=!tasks[index].status;
@@ -180,13 +186,22 @@ class App extends Component{
       
        var {tasks, isDisplayForm, taskEditing, filter, keyword,sort}=this.state; //=this.state.tasks
 
-       if(filter){
-           if(filter.name){
-               tasks=tasks.filter((task)=>{
-                   return task.name.toLowerCase().indexOf(filter.name)!==-1
-               })
-           }
-       }
+
+
+    //    if(filter){
+    //        if(filter.name){
+    //            tasks=tasks.filter((task)=>{
+    //                return task.name.toLowerCase().indexOf(filter.name)!==-1
+    //            })
+    //        }
+    //    }
+        tasks=_.filter(tasks,(task)=>{
+            return task.name.toLowerCase().indexOf(filter.name)!==-1
+        })
+
+
+
+
        tasks=tasks.filter((task)=>{
            if(filter.status===-1){
                return task
@@ -207,6 +222,7 @@ class App extends Component{
     //sap xep
        if(sort.by==='name'){
         tasks.sort((a,b)=>{
+            //a dung trc b
            if(a.name>b.name){
                 return sort.value
             }
