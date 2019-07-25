@@ -46,6 +46,23 @@ class TaskForm extends Component{
             });
         }
     }
+    componentWillReceiveProps(nextProps){
+        // console.log(nextProps)
+        if(nextProps&&nextProps.task){
+            this.setState({
+                id: nextProps.task.id,
+                name: nextProps.task.name,
+                status: nextProps.task.status
+            });
+            //sua->them
+        }else if(nextProps&&nextProps.task===null){
+            this.setState({
+                id: '',
+                name: '',
+                status: false
+            });
+        }
+    }
     render(){
         var {id}=this.state;
         // console.log(id);
