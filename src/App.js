@@ -4,6 +4,7 @@ import Control from './components/Control';
 import TaskList from './components/TaskList'
 import './App.css';
 import _ from 'lodash'
+import demo from './tranining/demo'
 // import {findIndex, filter} from 'lodash'
 class App extends Component{
     constructor(props) {
