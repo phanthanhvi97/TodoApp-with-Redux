@@ -38,7 +38,7 @@ class App extends Component{
     //         taskEditing:null
     //     });
     // }
-    this.props.onToggleForm()
+    console.log(this.props.onToggleForm())
     }
     onCloseForm=()=>{
         this.setState({
@@ -132,7 +132,7 @@ class App extends Component{
       
        var {taskEditing, filter, keyword,sort}=this.state; //=this.state.tasks
         var {isDisplayForm}=this.props
-
+        console.log(isDisplayForm)
 
     //    if(filter){
     //        if(filter.name){
@@ -238,7 +238,7 @@ const mapStateToProps = state=>{
 const mapDispatchToProps=(dispatch, props)=>{
     return {
         onToggleForm:()=>{
-            console.log(actions.toggleform())
+            // console.log(actions.toggleform())
             dispatch(actions.toggleform())
         }
     }

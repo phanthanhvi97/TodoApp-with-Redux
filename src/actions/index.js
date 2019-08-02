@@ -5,14 +5,13 @@ export const listAll =()=> {
     }
 }
 export const addTask=task=>{
-    return{
+    return{ 
         type: types.ADD_TASK,
         task:task
     }
 }
 export const toggleform = ()=>{
     return {
-        
         type: types.TOGGLE_FORM
     }
 }
