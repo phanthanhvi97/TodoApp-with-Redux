@@ -68,7 +68,6 @@ class TaskForm extends Component{
     }
     render(){
         var {id}=this.state;
-        // console.log(id);
     return(
         <div className="panel panel-warning">
         <div className="panel-heading">
@@ -116,6 +115,9 @@ const mapDispatchToProps=(dispatch, props)=>{
     return{
         onAddTask:(task)=>{
             dispatch(actions.addTask(task))
+        },
+        onCloseForm:()=>{
+            dispatch(actions.closeForm())
         }
     }
 }

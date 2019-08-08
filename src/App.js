@@ -26,7 +26,8 @@ class App extends Component{
       };
     };
     onToggleForm=()=>{
-        //them task
+        this.props.onToggleForm()
+    //them task
     //     if(this.state.isDisplayForm&&this.state.taskEditing!==null){
     //         this.setState({
     //             isDisplayForm:true,
@@ -38,7 +39,8 @@ class App extends Component{
     //         taskEditing:null
     //     });
     // }
-    console.log(this.props.onToggleForm())
+    // console.log(this.props.onToggleForm())
+
     }
     onCloseForm=()=>{
         this.setState({
@@ -129,11 +131,8 @@ class App extends Component{
         
     }
   render(){
-      
-       var {taskEditing, filter, keyword,sort}=this.state; //=this.state.tasks
+        var {taskEditing, filter, keyword,sort}=this.state; //=this.state.tasks
         var {isDisplayForm}=this.props
-        console.log(isDisplayForm)
-
     //    if(filter){
     //        if(filter.name){
     //            tasks=tasks.filter((task)=>{
@@ -144,8 +143,6 @@ class App extends Component{
     //     tasks=_.filter(tasks,(task)=>{
     //         return task.name.toLowerCase().indexOf(filter.name)!==-1
     //     })
-
-
 
 
     //    tasks=tasks.filter((task)=>{
@@ -160,10 +157,9 @@ class App extends Component{
     //            return task.name.toLowerCase().indexOf(keyword)!==-1;
     //        })
     //    }
-       var elmTaskForm = isDisplayForm?<TaskForm 
-                                        onSubmit={this.onSubmit} 
+       var elmTaskForm = isDisplayForm?<TaskForm  
                                         task={taskEditing}
-                                        onCloseForm={this.onCloseForm}/>:'';
+                                        />:'';
     //    console.log(sort)
     //sap xep
     //    if(sort.by==='name'){
@@ -232,15 +228,16 @@ class App extends Component{
 
 const mapStateToProps = state=>{
     return {
-        inDisplayForm:state.isDisplayForm
+        isDisplayForm:state.isDisplayForm
     }
 }
+
 const mapDispatchToProps=(dispatch, props)=>{
     return {
         onToggleForm:()=>{
-            // console.log(actions.toggleform())
-            dispatch(actions.toggleform())
-        }
+            dispatch(actions.toggleForm())
+        },
+        
     }
 }
 
