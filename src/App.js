@@ -3,7 +3,6 @@ import TaskForm from './components/TaskForm';
 import Control from './components/Control';
 import TaskList from './components/TaskList'
 import './App.css';
-import _ from 'lodash'
 import {connect} from 'react-redux'
 import * as actions from './actions/index'
 class App extends Component{
@@ -47,23 +46,6 @@ class App extends Component{
             isDisplayForm:false
         });
     }
-    onUpdateStatus=(id)=>{
-        var tasks=this.state.tasks
-        // console.log(id);
-        // var index=this.findIndex(id);
-        var index=_.findIndex(tasks,(task)=>{
-            return task.id===id
-        })
-        // var {tasks}=this.state;
-        if(index!==-1)
-        {
-            tasks[index].status=!tasks[index].status;
-            this.setState({
-                tasks:tasks
-            });
-            localStorage.setItem('tasks',JSON.stringify(tasks));
-        }
-    }
     findIndex=(id)=>{
         var {tasks}=this.state;
         var result=-1;
@@ -73,20 +55,6 @@ class App extends Component{
             }
         });
         return result;
-    }
-    onDelete=(id)=>{
-        var index=this.findIndex(id);
-        var {tasks}=this.state;
-        if(index!==-1)
-        {
-            tasks.splice(index, 1);
-            // tasks[index].status=!tasks[index].status;
-            this.setState({
-                tasks:tasks
-            });
-            localStorage.setItem('tasks',JSON.stringify(tasks));
-        }
-        // this.onCloseForm();
     }
     onShowForm=()=>{
         this.setState({
@@ -211,11 +179,8 @@ class App extends Component{
                 <div className="row mt-15">
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <TaskList 
-                        // tasks={tasks} 
-                        onUpdateStatus={this.onUpdateStatus}
-                        onDelete={this.onDelete}
-                        onUpdate={this.onUpdate}
-                        onFilter={this.onFilter}
+                            onUpdate={this.onUpdate}
+                            onFilter={this.onFilter}
                         />
                     </div>
                 </div>
