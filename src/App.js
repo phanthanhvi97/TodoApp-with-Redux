@@ -125,9 +125,7 @@ class App extends Component{
     //            return task.name.toLowerCase().indexOf(keyword)!==-1;
     //        })
     //    }
-       var elmTaskForm = isDisplayForm?<TaskForm  
-                                        task={taskEditing}
-                                        />:'';
+    //    var elmTaskForm = isDisplayForm?<TaskForm task={taskEditing}/>:'';
     //    console.log(sort)
     //sap xep
     //    if(sort.by==='name'){
@@ -164,7 +162,7 @@ class App extends Component{
         </div>
         <div className="row">
             <div className={isDisplayForm?"col-lg-4":""}>
-                {elmTaskForm}
+                <TaskForm task={taskEditing}/>:
             </div>
             <div className={isDisplayForm?"col-lg-8":"col-lg-12"}>
                 <button type="button" className="btn btn-primary" onClick={this.onToggleForm}>
