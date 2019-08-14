@@ -99,7 +99,7 @@ class App extends Component{
         
     }
   render(){
-        var {taskEditing, filter, keyword,sort}=this.state; //=this.state.tasks
+        // var {filter, keyword,sort}=this.state;
         var {isDisplayForm}=this.props
     //    if(filter){
     //        if(filter.name){
@@ -162,7 +162,7 @@ class App extends Component{
         </div>
         <div className="row">
             <div className={isDisplayForm?"col-lg-4":""}>
-                <TaskForm task={taskEditing}/>:
+                <TaskForm/>:
             </div>
             <div className={isDisplayForm?"col-lg-8":"col-lg-12"}>
                 <button type="button" className="btn btn-primary" onClick={this.onToggleForm}>

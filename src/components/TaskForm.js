@@ -28,9 +28,7 @@ class TaskForm extends Component{
     }
     onSubmit=(event)=>{
         event.preventDefault();
-        // this.props.onSubmit(this.state);
         this.props.onAddTask(this.state)
-        //huy bo va close form
         this.onClear();
         this.onCloseForm();
     }
@@ -50,15 +48,14 @@ class TaskForm extends Component{
         }
     }
     componentWillReceiveProps(nextProps){
-        // console.log(nextProps)
-        if(nextProps&&nextProps.task){
+        console.log(nextProps)
+        if(nextProps&&nextProps.itemEditing){
             this.setState({
-                id: nextProps.task.id,
-                name: nextProps.task.name,
-                status: nextProps.task.status
+                id: nextProps.itemEditing.id,
+                name: nextProps.itemEditing.name,
+                status: nextProps.itemEditing.status
             });
-            //sua->them
-        }else if(nextProps&&nextProps.task===null){
+        }else{
             this.setState({
                 id: '',
                 name: '',
@@ -109,7 +106,8 @@ class TaskForm extends Component{
 }
 const mapStateToProps = state=>{
     return{
-        isDisplayForm: state.isDisplayForm
+        isDisplayForm: state.isDisplayForm,
+        itemEditing:state.itemEditing
     }
 }
 const mapDispatchToProps=(dispatch, props)=>{
