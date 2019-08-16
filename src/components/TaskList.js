@@ -28,7 +28,6 @@ class TaskList extends Component{
       var elementTasks = tasks.map((task, index)=>{
           return <TaskItem
            key = {task.id} index={index} task={task}
-           onUpdate={this.props.onUpdate}
           />
       })
     return(

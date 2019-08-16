@@ -1,69 +1,69 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import * as actions from './../actions/index'
 
-class TaskItem extends Component{
-    onUpdateStatus=()=>{
+class TaskItem extends Component {
+    onUpdateStatus = () => {
         this.props.onUpdateStatus(this.props.task.id)
     }
-    onDelete=()=>{
+    onDelete = () => {
         this.props.onDeleteTask(this.props.task.id);
         this.props.onCloseForm()
 
     }
-    onUpdate=()=>{
-    this.props.onOpenForm()
-    this.props.onEditTask(this.props.task)
+    onUpdate = () => {
+        this.props.onOpenForm()
+        this.props.onEditTask(this.props.task)
     }
-  render(){
-      var {task, index}= this.props;
-    return(
-        <tr>
-            <td>{index+1}</td>
-            <td>{task.name}</td>
-            <td className="text-center">
-                <span 
-                className={task.status===true?'label label-success':'label label-danger'}
-                onClick={this.onUpdateStatus}
-                >
-                    {task.status===true?'Kich hoat':'An'}
-                </span>
-            </td>
-            <td className="text-center">
-                <button type="button" className="btn btn-warning" onClick={this.onUpdate}>
-                    <span className="fas fa-pencil-alt mr-5"></span>Sửa
+    render() {
+        var { task, index } = this.props;
+        return (
+            <tr>
+                <td>{index + 1}</td>
+                <td>{task.name}</td>
+                <td className="text-center">
+                    <span
+                        className={task.status === true ? 'label label-success' : 'label label-danger'}
+                        onClick={this.onUpdateStatus}
+                    >
+                        {task.status === true ? 'Kich hoat' : 'An'}
+                    </span>
+                </td>
+                <td className="text-center">
+                    <button type="button" className="btn btn-warning" onClick={this.onUpdate}>
+                        <span className="fas fa-pencil-alt mr-5"></span>Sửa
                 </button>
                     &nbsp;
                 <button type="button" className="btn btn-danger" onClick={this.onDelete}>
-                    <span className="fa fa-trash mr-5"></span>Xóa
+                        <span className="fa fa-trash mr-5"></span>Xóa
                 </button>
                 </td>
             </tr>
-    )
-  }
+        )
+    }
 }
-const mapStateToProps = ()=>{
+const mapStateToProps = () => {
     return {
     }
 }
-const mapDispatchToProps=(dispatch, props)=>{
+const mapDispatchToProps = (dispatch, props) => {
     return {
-        onUpdateStatus:(id)=>{
+        onUpdateStatus: (id) => {
             dispatch(actions.updateStatus(id))
         },
-        onDeleteTask:(id)=>{
+        onDeleteTask: (id) => {
             dispatch(actions.deleteTask(id))
         },
-        onCloseForm:()=>{
+        onCloseForm: () => {
             dispatch(actions.closeForm())
         },
-        onOpenForm:()=>{
+        onOpenForm: () => {
             dispatch(actions.openForm())
         },
-        onEditTask:(task)=>{
+        onEditTask: (task) => {
             dispatch(actions.editTask(task))
         }
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(TaskItem);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskItem);

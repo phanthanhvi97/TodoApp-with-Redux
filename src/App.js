@@ -12,7 +12,7 @@ class App extends Component{
       this.state = {
         //  tasks:[],
          //dong mo form add edit
-         taskEditing:null,
+        //  taskEditing:null,
          filter:{
              name:'',
              status:-1
@@ -25,12 +25,17 @@ class App extends Component{
       };
     };
     onToggleForm=()=>{
-        this.props.onToggleForm()
+        if(this.props.itemEditing&&this.props.itemEditing.id!==''){
+            this.props.onOpenForm()
+        }else{
+            this.props.onToggleForm()
+        }
         this.props.onClearTask({
             id:'',
             name:'',
             status:true
         })
+        
      }
     onCloseForm=()=>{
         this.setState({
@@ -51,16 +56,6 @@ class App extends Component{
         this.setState({
             isDisplayForm:true
         });
-    }
-    onUpdate=(id)=>{
-        // console.log(id);
-        var index=this.findIndex(id);
-        var {tasks}=this.state;
-        var taskEditing=tasks[index];
-        this.setState({
-            taskEditing:taskEditing
-        });
-        this.onShowForm();
     }
     onFilter=(filterName,filterStatus)=>{
         filterStatus=+filterStatus
@@ -168,7 +163,6 @@ class App extends Component{
                 <div className="row mt-15">
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <TaskList 
-                            onUpdate={this.onUpdate}
                             onFilter={this.onFilter}
                         />
                     </div>
@@ -182,7 +176,8 @@ class App extends Component{
 
 const mapStateToProps = state=>{
     return {
-        isDisplayForm:state.isDisplayForm
+        isDisplayForm:state.isDisplayForm,
+        itemEditing:state.itemEditing
     }
 }
 
@@ -193,8 +188,10 @@ const mapDispatchToProps=(dispatch, props)=>{
         },
         onClearTask:(task)=>{
             dispatch(actions.editTask(task))
-        }
-        
+        },
+        onOpenForm:()=>{
+            dispatch(actions.openForm())
+        },        
     }
 }
 
