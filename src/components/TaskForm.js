@@ -4,14 +4,12 @@ import * as actions from './../actions/index'
 class TaskForm extends Component{
     constructor(props) {
       super(props)
-    
       this.state = {
          id:'',
          name:'',
          status:true
       };
     };
-    
     onCloseForm=()=>{
         this.props.onCloseForm();
     }
@@ -28,14 +26,16 @@ class TaskForm extends Component{
     }
     onSubmit=(event)=>{
         event.preventDefault();
-        this.props.onAddTask(this.state)
+
+        this.props.onSaveTask(this.state)
         this.onClear();
         this.onCloseForm();
     }
     onClear=()=>{
         this.setState({
+            id:'',
             name: '',
-            status: false
+            status: false,
         });
     }
     componentWillMount(){
@@ -48,7 +48,7 @@ class TaskForm extends Component{
         }
     }
     componentWillReceiveProps(nextProps){
-        console.log(nextProps)
+        // console.log(nextProps)
         if(nextProps&&nextProps.itemEditing){
             this.setState({
                 id: nextProps.itemEditing.id,
@@ -56,22 +56,16 @@ class TaskForm extends Component{
                 status: nextProps.itemEditing.status
             });
         }else{
-            this.setState({
-                id: '',
-                name: '',
-                status: false
-            });
+            this.onClear()
         }
     }
     render(){
-        var {id}=this.state;
-        if(!this.props.isDisplayForm) return ''
+        if(!this.props.isDisplayForm) return null
         return(
             <div className="panel panel-warning">
             <div className="panel-heading">
                 <h3 className="panel-title">
-                    {/* {id} */}
-                    {id===''?'Them cong viec':'Cap nhat cong viec'}
+                    {this.state.id===''?'Them cong viec':'Cap nhat cong viec'}
                     <span className="fa fa-times-circle text-right" onClick={this.onCloseForm}></span>
                 </h3>
             </div>
@@ -112,8 +106,8 @@ const mapStateToProps = state=>{
 }
 const mapDispatchToProps=(dispatch, props)=>{
     return{
-        onAddTask:(task)=>{
-            dispatch(actions.addTask(task))
+        onSaveTask:(task)=>{
+            dispatch(actions.saveTask(task))
         },
         onCloseForm:()=>{
             dispatch(actions.closeForm())

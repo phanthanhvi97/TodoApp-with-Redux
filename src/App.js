@@ -26,21 +26,12 @@ class App extends Component{
     };
     onToggleForm=()=>{
         this.props.onToggleForm()
-    //them task
-    //     if(this.state.isDisplayForm&&this.state.taskEditing!==null){
-    //         this.setState({
-    //             isDisplayForm:true,
-    //             taskEditing:null
-    //         });
-    //     }else{
-    //     this.setState({
-    //         isDisplayForm:!this.state.isDisplayForm,
-    //         taskEditing:null
-    //     });
-    // }
-    // console.log(this.props.onToggleForm())
-
-    }
+        this.props.onClearTask({
+            id:'',
+            name:'',
+            status:true
+        })
+     }
     onCloseForm=()=>{
         this.setState({
             isDisplayForm:false
@@ -162,7 +153,7 @@ class App extends Component{
         </div>
         <div className="row">
             <div className={isDisplayForm?"col-lg-4":""}>
-                <TaskForm/>:
+                <TaskForm/>
             </div>
             <div className={isDisplayForm?"col-lg-8":"col-lg-12"}>
                 <button type="button" className="btn btn-primary" onClick={this.onToggleForm}>
@@ -200,6 +191,9 @@ const mapDispatchToProps=(dispatch, props)=>{
         onToggleForm:()=>{
             dispatch(actions.toggleForm())
         },
+        onClearTask:(task)=>{
+            dispatch(actions.editTask(task))
+        }
         
     }
 }

@@ -1,4 +1,5 @@
 import * as types from './../constants/ActionTypes'
+
 var id=''
 var index=-1
 var s4=()=>{
@@ -22,14 +23,20 @@ var myReducer = (state=initialState,action)=>{
     switch(action.type){
         case types.LIST_ALL:
             return state
-        case types.ADD_TASK:
-            // console.log(action)
-            var newTask = {
-                id: generateID(),
+        case types.SAVE_TASK:
+            var task = {
+                id: action.task.id,
                 name: action.task.name,
                 status: action.task.status
             }
-            state.push(newTask)
+            if(!task.id){
+                task.id=generateID()
+                state.push(task)
+            }
+            else{
+                index=findIndex(state,task.id)
+                state[index]=task
+            }
             localStorage.setItem('tasks',JSON.stringify(state))
             return [...state]
         case types.UPDATE_STATUS_TASK:
