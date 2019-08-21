@@ -10,13 +10,6 @@ class App extends Component{
       super(props)
     
       this.state = {
-        //  tasks:[],
-         //dong mo form add edit
-        //  taskEditing:null,
-         filter:{
-             name:'',
-             status:-1
-         },
          keyword:'',
          sort:{
              by:'',
@@ -57,15 +50,6 @@ class App extends Component{
             isDisplayForm:true
         });
     }
-    onFilter=(filterName,filterStatus)=>{
-        filterStatus=+filterStatus
-        this.setState({
-            filter:{
-                name: filterName.toLowerCase(),
-                status:filterStatus
-            }
-        })
-    }
     onSearch=(keyword)=>{
         // console.log(keyword)
         this.setState({
@@ -85,27 +69,7 @@ class App extends Component{
         
     }
   render(){
-        // var {filter, keyword,sort}=this.state;
         var {isDisplayForm}=this.props
-    //    if(filter){
-    //        if(filter.name){
-    //            tasks=tasks.filter((task)=>{
-    //                return task.name.toLowerCase().indexOf(filter.name)!==-1
-    //            })
-    //        }
-    //    }
-    //     tasks=_.filter(tasks,(task)=>{
-    //         return task.name.toLowerCase().indexOf(filter.name)!==-1
-    //     })
-
-
-    //    tasks=tasks.filter((task)=>{
-    //        if(filter.status===-1){
-    //            return task
-    //        }else{
-    //            return task.status===(filter.status===1?true:false)
-    //        }
-    //    })
     //    if(keyword){
     //        tasks=tasks.filter((task)=>{
     //            return task.name.toLowerCase().indexOf(keyword)!==-1;
@@ -162,9 +126,7 @@ class App extends Component{
                 </div>
                 <div className="row mt-15">
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <TaskList 
-                            onFilter={this.onFilter}
-                        />
+                        <TaskList />
                     </div>
                 </div>
             </div>
